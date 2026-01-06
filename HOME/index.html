@@ -1,105 +1,116 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>My first Vue page</title>
-    <link rel="stylesheet" href="css/style.css?version=0.1">
-    <link rel="stylesheet" href="css/boost.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Combined Dashboard & Vue</title>
     
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/style.css">
+    
+    <link rel="stylesheet" href="css/boost.css">
 </head>
 <body>
 
-    <div id="app">
+    <div class="app-container">
 
-        <h1>Vue Example</h1>
-        <p>The message below is taken from 'data' inside the Vue instance:</p>
-        
-        <h3>{{ message }}</h3>
-
-        <hr>
-
-        <div id="lightbox" class="lightbox">
-            <span class="close-btn">&times;</span>
-            <img class="lightbox-content" id="lightbox-img" alt="Lightbox Image">
-            <div id="caption"></div>
-        </div>
-
-        <div class="app-container">
-            
-            <nav class="nav-bar">
-                <div class="nav-left-icons">
-                    <div class="icon-box"><i class="bi bi-person"></i></div>
-                    <button class="btn-pill btn-fill" style="margin-left: 10px; font-size: 0.8rem;">WEBPROG</button>
-                </div>
-                
-                <div class="nav-menu">
-                    <span class="active">Personal Webpage</span>
-                </div>
-
-                <div class="nav-auth-buttons">
-                    <button class="btn-pill btn-outline">Contact</button>
-                    <button class="btn-pill btn-fill">GitHub</button>
-                </div>
-            </nav>
-
-            <section class="hero-banner">
-                <div class="hero-text">
-                    <h1>Ma. Sofia Anne</h1>
-                    <p>BSCS-SF Student specializing in Cyber Security.<br>
-                    Future Veterinarian & Web Programmer.</p>
-                </div>
-        
-                <div class="col-search">
-                    <div class="section-header">
-                        Skills & Interests
-                    </div>
-                    <div class="search-list">
-                        <div class="search-pill">Python & CSS</div>
-                        <div class="search-pill">Cyber Security</div>
-                        <div class="search-pill">Painting & Gaming</div>
-                        <div class="search-pill">Helping Animals</div>
-                        <div class="search-pill">Crime Docs</div>
-                    </div>
-                </div>
-
-                <div class="col-info">
-                    <div class="section-header">
-                        About
-                    </div>
-                    <div class="info-list">
-                        <div class="info-card">
-                            <div class="info-img">🎯</div>
-                            <div class="info-content">
-                                <h4>Life Goal</h4>
-                                <p>Financial stability to support loved ones.</p>
-                            </div>
-                        </div>
-
-                        <div class="info-card">
-                            <div class="info-img">🐾</div>
-                            <div class="info-content">
-                                <h4>Dream Project</h4>
-                                <p>To build a large animal rescue shelter.</p>
-                            </div>
-                        </div>
-
-                        <div class="info-card">
-                            <div class="info-img">💻</div>
-                            <div class="info-content">
-                                <h4>Experience</h4>
-                                <p>Linux, MySQL, Agile, Project Management.</p>
-                                <p>CSS, HTML</p>                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section> 
-            
-            <div style="text-align: center; margin-top: 50px; margin-bottom: 20px; color: var(--text-light); font-size: 0.8rem;">
-                WEBPROG SF241 | © 2025 Ma. Sofia Anne Revilla
+        <div style="margin-bottom: 40px;">
+            <div id="app">
+                <h1>Vue Example</h1>
+                <p>The message below is taken from 'data' inside the Vue instance:</p>
+                <h3>{{ message }}</h3>
             </div>
         </div>
 
+        <nav class="nav-bar">
+            <div class="nav-left-icons">
+                <div class="icon-box"><i class="bi bi-person"></i></div>
+                <button class="btn-pill btn-fill" style="margin-left: 10px; font-size: 0.8rem;">WEBPROG</button>
+            </div>
+            
+            <div class="nav-menu">
+                <span class="active">Personal Webpage</span>
+            </div>
 
-<script src="js/vue.js"></script>
+            <div class="nav-auth-buttons">
+                <button class="btn-pill btn-outline">Contact</button>
+                <button class="btn-pill btn-fill">GitHub</button>
+            </div>
+        </nav>
+
+        <section class="hero-banner">
+            <div class="hero-text">
+                <h1>Ma. Sofia Anne</h1>
+                <p>BSCS-SF Student specializing in Cyber Security.<br>
+                Future Veterinarian & Web Programmer.</p>
+            </div>
+            <div class="hero-img-wrapper">
+                <img src="image/me.png" alt="Profile Character" onerror="this.style.display='none'">
+            </div>
+        </section>
+
+        <div class="dashboard-grid">
+
+            <div class="col-gallery">
+                <div class="section-header">
+                    Gallery <small style="font-size: 0.8rem; opacity: 0.6; font-weight: normal;">(Click image to expand)</small>
+                </div>
+                <div class="gallery-container">
+                    <div class="gallery-card"><div class="gallery-overlay">Drawing</div></div>
+                    <div class="gallery-card"><div class="gallery-overlay">Family</div></div>
+                    <div class="gallery-card"><div class="gallery-overlay">Me</div></div>
+                    <div class="gallery-card"><div class="gallery-overlay">Pets</div></div>
+                </div>
+            </div>
+
+            <div class="col-search">
+                <div class="section-header">Skills & Interests</div>
+                <div class="search-list">
+                    <div class="search-pill">Python & CSS</div>
+                    <div class="search-pill">Cyber Security</div>
+                    <div class="search-pill">Painting & Gaming</div>
+                    <div class="search-pill">Helping Animals</div>
+                    <div class="search-pill">Crime Docs</div>
+                </div>
+            </div>
+
+            <div class="col-info">
+                <div class="section-header">About</div>
+                <div class="info-list">
+                    <div class="info-card">
+                        <div class="info-img">🎯</div>
+                        <div class="info-content">
+                            <h4>Life Goal</h4>
+                            <p>Financial stability to support loved ones.</p>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-img">🐾</div>
+                        <div class="info-content">
+                            <h4>Dream Project</h4>
+                            <p>To build a large animal rescue shelter.</p>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-img">💻</div>
+                        <div class="info-content">
+                            <h4>Experience</h4>
+                            <p>Linux, MySQL, Agile, Project Management.</p>
+                            <p>CSS, HTML</p>                
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        
+        <div style="text-align: center; margin-top: 50px; margin-bottom: 20px; color: var(--text-light); font-size: 0.8rem;">
+            WEBPROG SF241 | © 2025 Ma. Sofia Anne Revilla
+        </div>
+    </div>
+
+      <script src="js/vue.js"></script>
+   
 </body>
 </html>
