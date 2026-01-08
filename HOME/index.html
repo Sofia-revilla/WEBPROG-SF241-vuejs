@@ -12,9 +12,17 @@
     <link rel="stylesheet" href="css/style.css">
     
     <link rel="stylesheet" href="css/boost.css">
+    <link rel="stylesheet" href="css/images.css">
 
 </head>
 <body>
+<div id="app2">
+
+  <div>
+    <img v-for="x in manyFoods" v-bind:src="x">
+  </div>
+
+</div>
 
     <div class="app-container">
 
@@ -25,6 +33,7 @@
             <h3>{{ message }}</h3>
 
             <script src="js/vue.js"></script>
+            <script src="js/images.js"></script>
         </div>
     </div>
 
