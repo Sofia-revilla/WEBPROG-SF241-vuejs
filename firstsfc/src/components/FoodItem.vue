@@ -11,8 +11,8 @@ FoodItem.vue
 export default {
   data() {
     return {
-      name: 'Apples',
-      message: 'I like apples'
+      name: 'SAGING SANGING',
+      message: 'MANGA MANGA, PAPAYA PAPAYA'
     }
   }
 };
