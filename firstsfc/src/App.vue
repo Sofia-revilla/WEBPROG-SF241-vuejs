@@ -15,7 +15,7 @@ App.vue
     display: inline-block;
     margin: 10px;
     padding: 10px;
-    background-color: lightgreen>;
+    background-color: rgb(238, 219, 144);
   }
 </style>
  
