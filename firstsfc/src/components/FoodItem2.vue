@@ -1,5 +1,5 @@
 <template>
-  <div class="prutas">
+  <div class="gulay">
     <h2>{{ name }}</h2>
     <p>{{ message }}</p>
   </div>
@@ -9,28 +9,28 @@
 export default {
   data() {
     return {
-      name: 'Apple',
-      message: 'This is a yellow apple.'
+      name: 'Gulay at Prutas',
+      message: 'Mag tanim ay hindi biro'
     }
   }
 };
 </script>
 
 <style>
- .prutas {
+  .gulay {
     width: 200px;
-    height: 180px;
-    background-color: #fce303; /* Bright Yellow */
-    border: 2px solid #d4be00;
-    /* This creates the rounded apple shape */
-    border-radius: 50% 50% 50% 50% / 45% 45% 55% 55%;
+    height: 200px;
+    background-color: lightgreen;
+    border: 2px solid #7cb37c;
+    /* This creates the leaf shape */
+    border-radius: 0 100% 0 100%;
     
     display: inline-flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     margin: 20px;
-    padding: 10px;
+    padding: 20px;
     text-align: center;
-  }
+  } 
 </style>
