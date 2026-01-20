@@ -1,9 +1,5 @@
 <template>
   <div :class="['app-wrapper', { 'locked': isLocked }]">
-    <audio id="sfx-click" ref="sfxClick" src="@/assets/audio/typewriter-click.mp3" preload="auto"></audio>
-    <audio id="sfx-pop" ref="sfxPop" src="@/assets/audio/firework.mp3" preload="auto"></audio>
-    <audio id="bg-music" ref="bgMusic" src="@/assets/audio/down.mp3" loop></audio>
-
     <div class="cursor-dot" data-cursor-dot></div>
     <div class="cursor-outline" data-cursor-outline></div>
     <canvas id="click-canvas"></canvas>
@@ -27,51 +23,44 @@
     <div v-if="showWelcome" id="welcome-screen">
         <div class="slot-machine-container">
             <div class="slot-window">
-                <div class="slot-reel">H</div>
-                <div class="slot-reel">E</div>
-                <div class="slot-reel">L</div>
-                <div class="slot-reel">L</div>
-                <div class="slot-reel">O</div>
+                <div class="slot-reel" id="reel-1">?</div>
+                <div class="slot-reel" id="reel-2">?</div>
+                <div class="slot-reel" id="reel-3">?</div>
+                <div class="slot-reel" id="reel-4">?</div>
+                <div class="slot-reel" id="reel-5">?</div>
             </div>
-            <div class="slot-sub">THERE</div>
-            <button id="enter-btn" @click="enterProfile" style="opacity: 1; pointer-events: auto;">ENTER PROFILE</button>
+            <div id="slot-sub" class="slot-sub">THERE</div>
+            <button id="enter-btn" @click="enterProfile" style="opacity: 0; pointer-events: none;">ENTER PROFILE</button>
         </div>
     </div>
 
     <div class="app-container">
         <nav class="nav-bar">
             <div class="nav-left-icons">
-                <a href="https://www.linkedin.com/in/ma-sofia-anne-revilla-" target="_blank" class="icon-box sfx-trigger"><i class="bi bi-linkedin"></i></a>
-                <div class="icon-box sfx-trigger" @click="toggleTheme"><i class="bi bi-moon"></i></div>
-                <a href="#" class="btn-pill btn-fill sfx-trigger" @click.prevent="openModal('References', 'External links loading...')" style="margin-left: 10px; font-size: 0.8rem;">REFERENCES</a>
+                <a href="https://www.linkedin.com/in/ma-sofia-anne-revilla-" target="_blank" class="icon-box"><i class="bi bi-linkedin"></i></a>
+                <div class="icon-box" @click="toggleTheme"><i class="bi bi-moon"></i></div>
+                <a href="#" class="btn-pill btn-fill" @click.prevent="openModal('References', 'External links...')">REFERENCES</a>
             </div>
             <div class="nav-menu"><span class="active">BSCS-SF Student Profile</span></div>
             <div class="nav-auth-buttons">
-                <button class="btn-pill btn-outline sfx-trigger" @click="showContact = true">Contact Me</button>
-                <a href="https://github.com/Sofia-revilla" target="_blank" class="btn-pill btn-fill sfx-trigger">GitHub</a>
+                <button class="btn-pill btn-outline" @click="openModal('Contact', 'Email: sofia.revilla@example.com')">Contact Me</button>
+                <a href="https://github.com/Sofia-revilla" target="_blank" class="btn-pill btn-fill">GitHub</a>
             </div>
         </nav>
 
         <section class="hero-banner" id="hero">
             <div class="hero-text">
                 <h1>Ma. Sofia Anne</h1>
-                <p><strong>Future Military Cyber Specialist & Veterinarian</strong><br>
-                "Practicality over passion, but passion always finds a way."</p>
-                <button class="btn-pill btn-outline sfx-trigger" style="margin-top:10px;">View Weakness ⚠️</button>
+                <p><strong>Future Military Cyber Specialist & Veterinarian</strong></p>
+                <button id="weakness-btn" class="btn-pill btn-outline">View Weakness ⚠️</button>
             </div>
             <div class="hero-img-wrapper">
-                <img src="@/components/gallery/me.png" alt="Active" class="char-light">
-                <img src="@/components/gallery/mesleep.png" alt="Sleeping" class="char-dark">
+                <img src="/image/me.png" alt="Active" class="char-light">
+                <img src="/image/mesleep.png" alt="Sleeping" class="char-dark">
             </div>
         </section>
 
-        <div class="dashboard-grid" style="margin-bottom: 40px;">
-            <div class="about-card">
-                <div class="section-header">About Me</div>
-                <h3 style="color: var(--primary-blue);">Aspiring Cyber Operations Specialist</h3>
-                <p>Driven 2nd-year CS student at Asia Pacific College specializing in Cybersecurity & Forensics.</p>
-            </div>
-
+        <div class="dashboard-grid">
             <div id="vue-capabilities-app" class="capabilities-display">
                 <div class="section-header" style="color: white;">Capabilities</div>
                 <div class="scrolling-wrapper">
@@ -83,45 +72,45 @@
                                 <small>{{ item.desc }}</small>
                             </div>
                         </div>
-                        <div v-for="(item, index) in capabilities" :key="'dup'+index" class="cap-item">
-                            <div class="cap-icon-box">{{ item.icon }}</div>
-                            <div class="cap-info">
-                                <h4>{{ item.title }}</h4>
-                                <small>{{ item.desc }}</small>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="section-header" id="projects">Projects</div>
-        <div class="projects-grid">
-            <div class="project-card" @click="openModal('Face Track', 'Attendance tracker built with Python.')">
-                <div class="p-icon"><i class="bi bi-person-bounding-box"></i></div>
-                <h3>Face Track</h3>
-                <p>Attendance System</p>
+        <div class="col-gallery-wide centered-gallery" id="gallery-section" style="margin-top: 50px;">
+            <div class="section-header">Life Gallery</div>
+            <div id="art-gallery-container" class="art-container landscape-art">
+                <div class="art-ui">
+                    <h2 id="art-title">Loading...</h2>
+                    <p id="art-artist">MEMORIES</p>
+                </div>
             </div>
         </div>
 
-        <div v-if="activeModal" class="modal-overlay" style="display: flex;">
-            <div class="modal-content">
-                <span class="close-modal" @click="activeModal = null">&times;</span>
-                <h2>{{ modalTitle }}</h2>
-                <div v-html="modalBody"></div>
-            </div>
+        <div id="lightbox" class="lightbox">
+            <span class="close-btn">&times;</span>
+            <div class="lightbox-nav prev-btn"><i class="bi bi-chevron-left"></i></div>
+            <img class="lightbox-content" id="lightbox-img">
+            <div class="lightbox-nav next-btn"><i class="bi bi-chevron-right"></i></div>
+            <div id="caption"></div>
+            <div id="album-counter">1 / 1</div>
+        </div>
+    </div>
+
+    <div v-if="activeModal" class="modal-overlay" style="display: flex;">
+        <div class="modal-content">
+            <span class="close-modal" @click="activeModal = null">&times;</span>
+            <h2>{{ modalTitle }}</h2>
+            <div v-html="modalBody"></div>
         </div>
     </div>
   </div>
 </template>
 
 <script>
-import { gsap } from 'gsap';
-
-/** * Importing custom JS effects from the 'effect' folder.
- */
-import './effect/script.js';
-import './effect/gallery.js';
+// Import logic functions from your effect folder
+import { initGallery } from './effect/gallery.js';
+import { initPortfolioEffects } from './effect/script.js';
 
 export default {
   name: 'PersonalProfile',
@@ -130,7 +119,7 @@ export default {
       isLocked: true,
       showWelcome: true,
       isSideNavActive: false,
-      activeModal: null,
+      activeModal: false,
       modalTitle: '',
       modalBody: '',
       scrollY: 0,
@@ -145,34 +134,23 @@ export default {
     }
   },
   mounted() {
-    this.initScroll();
+    // Start effects after DOM is ready
+    initGallery();
+    initPortfolioEffects();
+    this.startScrollAnimation();
   },
   methods: {
-    initScroll() {
-      setInterval(() => {
-        this.scrollY -= 0.8; 
-        if (this.scrollY < -540) {
-          this.scrollY = 0;
-        }
-      }, 16); 
-    },
     enterProfile() {
       this.showWelcome = false;
       this.isLocked = false;
-      // Audio play requires user interaction
-      if (this.$refs.bgMusic) {
-        this.$refs.bgMusic.play().catch(e => console.log("Autoplay prevented"));
-      }
     },
     toggleSideNav() {
       this.isSideNavActive = !this.isSideNavActive;
     },
     scrollToSection(id) {
       const el = document.getElementById(id);
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth' });
-        this.isSideNavActive = false;
-      }
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+      this.isSideNavActive = false;
     },
     openModal(title, body) {
       this.modalTitle = title;
@@ -180,7 +158,13 @@ export default {
       this.activeModal = true;
     },
     toggleTheme() {
-       document.body.classList.toggle('dark-theme');
+      document.body.classList.toggle('dark-mode');
+    },
+    startScrollAnimation() {
+      setInterval(() => {
+        this.scrollY -= 0.8;
+        if (this.scrollY < -300) this.scrollY = 0;
+      }, 16);
     }
   }
 }
@@ -188,19 +172,3 @@ export default {
 
 <style src="./css/design.css"></style>
 <style src="./css/gallery.css"></style>
-
-<style scoped>
-.app-wrapper.locked {
-  overflow: hidden;
-  height: 100vh;
-}
-.capabilities-display {
-  background: var(--primary-dark);
-  padding: 30px;
-  border-radius: var(--radius-lg);
-  color: white;
-  height: 350px;
-  position: relative;
-  overflow: hidden;
-}
-</style>

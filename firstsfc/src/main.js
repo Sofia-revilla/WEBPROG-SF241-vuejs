@@ -6,7 +6,8 @@ import FoodItem2 from './components/FoodItem2.vue'
 // Import the PersonalProfile component
 import PersonalProfile from './components/PersonalProfile.vue'
 
-// Import Global CSS files
+// Import Global CSS files 
+// These will be available throughout your entire application
 import './components/css/design.css'
 import './components/css/gallery.css'
 
@@ -18,9 +19,5 @@ app.component('food-item2', FoodItem2)
 
 // Register PersonalProfile globally
 app.component('personal-profile', PersonalProfile)
-
-// Import logic/effects
-import './components/effect/gallery.js'
-import './components/effect/script.js'
 
 app.mount('#app')
