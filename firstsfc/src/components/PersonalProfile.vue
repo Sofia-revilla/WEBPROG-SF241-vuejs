@@ -1,12 +1,6 @@
 <template>
   <div :class="['app-wrapper', { 'locked': isLocked }]">
-    <div class="cursor-dot" data-cursor-dot></div>
-    <div class="cursor-outline" data-cursor-outline></div>
     <canvas id="click-canvas"></canvas>
-
-    <div id="heart-nav-toggle" class="heart-fab" @click="toggleSideNav">
-      <img src="https://i.pinimg.com/originals/6a/71/c8/6a71c8522afd22f20c4e78f96cf0b150.gif" alt="Heart Nav">
-    </div>
 
     <div id="side-nav" :class="{ 'active': isSideNavActive }">
       <span class="close-nav" @click="toggleSideNav">&times;</span>
@@ -27,7 +21,7 @@
             <i class="bi bi-linkedin"></i>
           </a>
           <div class="icon-box" @click="toggleTheme"><i class="bi bi-moon"></i></div>
-          <a href="#" class="btn-pill btn-fill" @click.prevent="openModal('References', 'External links loading...')" style="margin-left: 10px; font-size: 0.8rem;">REFERENCES</a>
+          <a href="#" class="btn-pill btn-fill" @click.prevent="openModal('References', 'Links to GitHub and Resume.')" style="margin-left: 10px; font-size: 0.8rem;">REFERENCES</a>
         </div>
         <div class="nav-menu"><span class="active">BSCS-SF Student Profile</span></div>
         <div class="nav-auth-buttons">
@@ -41,22 +35,50 @@
           <h1>Ma. Sofia Anne</h1>
           <p><strong>Future Military Cyber Specialist & Veterinarian</strong><br>
           "Practicality over passion, but passion always finds a way."</p>
-          <button class="btn-pill btn-outline" style="margin-top:10px;">View Weakness ⚠️</button>
         </div>
         <div class="hero-img-wrapper">
-          <img src="/image/me.png" alt="Active" class="char-light">
-          <img src="/image/mesleep.png" alt="Sleeping" class="char-dark">
+          <img src="/image/me.png" alt="Profile" class="char-light">
         </div>
       </section>
 
-      <div class="dashboard-grid" style="margin-bottom: 40px;">
+      <div class="resume-section" id="resume-section">
+        <button class="resume-toggle-btn" @click="toggleResume">
+          <i class="bi bi-file-earmark-person"></i> VIEW FULL BIO & RESUME
+        </button>
+        
+        <div :class="['resume-content', { 'active': isResumeOpen }]">
+          <div class="paper-sheet">
+            <div class="paper-header">
+              <h2>CURRICULUM VITAE</h2>
+              <p>MA. SOFIA ANNE C. REVILLA</p>
+            </div>
+            <div class="paper-grid">
+              <div class="resume-item">
+                <span class="resume-label">Profile</span>
+                <span class="resume-value">
+                  <strong>Age:</strong> 20 (April 26, 2005)<br>
+                  <strong>School:</strong> Asia Pacific College<br>
+                  <strong>Course:</strong> BSCS - Cybersecurity & Forensics
+                </span>
+              </div>
+              <div class="resume-item full-width">
+                <span class="resume-label">Experience</span>
+                <div class="experience-box">
+                  <strong>Head of Arts Committee (2 Years)</strong><br>
+                  Clark Air Base Youth Club<br>
+                  <em>Led artistic initiatives and managed events.</em>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="dashboard-grid">
         <div class="about-card" style="background: var(--card-white); padding: 40px; border-radius: var(--radius-lg);">
           <div class="section-header">About Me</div>
           <h3 style="color: var(--primary-blue); margin-bottom: 15px;">Aspiring Cyber Operations Specialist</h3>
-          <p style="line-height: 1.8;">
-            Driven 2nd-year Computer Science student specializing in Cybersecurity & Forensics at Asia Pacific College. 
-            My career path is defined by a unique duality: the precision of military cyber defense and the compassion of veterinary medicine.
-          </p>
+          <p>Driven 2nd-year Computer Science student specializing in Cybersecurity & Forensics. I aim to merge military cyber defense with my passion for animal rescue.</p>
         </div>
 
         <div class="capabilities-display">
@@ -84,24 +106,48 @@
 
       <div class="section-header" id="projects">Projects</div>
       <div class="projects-grid">
-        <div class="project-card" @click="openModal('Face Track', 'Attendance tracker built with Python and OpenCV.')">
+        <div class="project-card" @click="openModal('Face Track', 'Attendance face tracker for school used by LeanTech. Built with Python.')">
           <div class="p-icon"><i class="bi bi-person-bounding-box"></i></div>
           <h3>Face Track</h3>
           <p>Attendance System</p>
         </div>
-        <div class="project-card" @click="openModal('TechZone DB', 'A complete Database Management System for inventory.')">
+        <div class="project-card" @click="openModal('TechZone DB', 'A Database Management System for Mr. Edison Co of TechZone.')">
           <div class="p-icon"><i class="bi bi-database"></i></div>
           <h3>TechZone DB</h3>
           <p>Database Management</p>
         </div>
+        <div class="project-card" @click="openModal('Cyber Lab', 'Network Security Simulation and Packet Analysis project.')">
+          <div class="p-icon"><i class="bi bi-shield-lock"></i></div>
+          <h3>Cyber Lab</h3>
+          <p>Security Simulation</p>
+        </div>
       </div>
 
-      <div class="col-gallery-wide centered-gallery" id="gallery-section" style="margin-top: 50px;">
-        <div class="section-header">Life Gallery</div>
-        <div class="art-container landscape-art" style="display: flex; align-items: center; justify-content: center; background: #222;">
-          <div class="art-ui" style="position: static; text-align: center;">
-            <h2 style="color: white;">Gallery Preview</h2>
-            <p style="color: var(--primary-blue);">JS EFFECTS DISABLED</p>
+      <div class="dashboard-grid" style="margin-top: 40px;">
+        <div class="col-info">
+          <div class="section-header">Goals & Dreams</div>
+          <div class="info-list">
+            <div class="info-card">
+              <div class="info-img">🐾</div>
+              <div class="info-content"><h4>Dream</h4><p>Build a large animal rescue shelter.</p></div>
+            </div>
+            <div class="info-card">
+              <div class="info-img">🛡️</div>
+              <div class="info-content"><h4>Career</h4><p>Military Cyber Operations.</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-info">
+          <div class="section-header">Hobbies</div>
+          <div class="info-list">
+            <div class="info-card">
+              <div class="info-img">🎨</div>
+              <div class="info-content"><h4>Arts</h4><p>Drawing, Painting & Design.</p></div>
+            </div>
+            <div class="info-card">
+              <div class="info-img">🔫</div>
+              <div class="info-content"><h4>Range</h4><p>Target practice and shooting.</p></div>
+            </div>
           </div>
         </div>
       </div>
@@ -122,9 +168,10 @@ export default {
   name: 'PersonalProfile',
   data() {
     return {
-      isLocked: false, // Set to false to bypass welcome lock
-      showWelcome: false, // Set to false to bypass intro
+      isLocked: false,
+      showWelcome: false,
       isSideNavActive: false,
+      isResumeOpen: false,
       activeModal: false,
       modalTitle: '',
       modalBody: '',
@@ -144,7 +191,6 @@ export default {
   },
   methods: {
     startScrollAnimation() {
-      // Keep the Vue-based scrolling for the capabilities list
       setInterval(() => {
         this.scrollY -= 0.8;
         if (this.scrollY < -540) {
@@ -154,6 +200,9 @@ export default {
     },
     toggleSideNav() {
       this.isSideNavActive = !this.isSideNavActive;
+    },
+    toggleResume() {
+      this.isResumeOpen = !this.isResumeOpen;
     },
     scrollToSection(id) {
       const el = document.getElementById(id);
@@ -178,7 +227,7 @@ export default {
 <style src="./css/gallery.css"></style>
 
 <style scoped>
-/* Ensure your mouse is visible since the JS cursor is removed */
+/* Resetting hidden mouse from design.css */
 :deep(*) {
   cursor: auto !important;
 }
@@ -204,7 +253,26 @@ export default {
   gap: 15px;
 }
 
-.about-card p {
-  color: var(--text-main);
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.8);
+  z-index: 10005;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  max-width: 500px;
+  position: relative;
+  color: #333;
+}
+
+.dark-mode .modal-content {
+  background: #242526;
+  color: #e4e6eb;
 }
 </style>
