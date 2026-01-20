@@ -19,4 +19,8 @@ app.component('food-item2', FoodItem2)
 // Register PersonalProfile globally
 app.component('personal-profile', PersonalProfile)
 
+// Import logic/effects
+import './components/effect/gallery.js'
+import './components/effect/script.js'
+
 app.mount('#app')
