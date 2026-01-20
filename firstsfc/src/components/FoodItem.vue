@@ -1,7 +1,14 @@
 <template>
-  <div class="prutas">
-    <h2>{{ name }}</h2>
-    <p>{{ message }}</p>
+  <div class="container">
+    <div class="gulay">
+      <h2>{{ gulayName }}</h2>
+      <p>{{ gulayMessage }}</p>
+    </div>
+
+    <div class="prutas">
+      <h2>{{ prutasName }}</h2>
+      <p>{{ prutasMessage }}</p>
+    </div>
   </div>
 </template>
 
@@ -9,20 +16,49 @@
 export default {
   data() {
     return {
-      name: 'Apple',
-      message: 'This is a yellow apple.'
+      // Data for Gulay
+      gulayName: 'Gulay at Prutas',
+      gulayMessage: 'Mag tanim ay hindi biro',
+      
+      // Data for Prutas
+      prutasName: 'Apple',
+      prutasMessage: 'This is a yellow apple.'
     }
   }
 };
 </script>
 
 <style>
- .prutas {
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-family: sans-serif;
+  }
+
+  /* Leaf Shape */
+  .gulay {
+    width: 200px;
+    height: 200px;
+    background-color: lightgreen;
+    border: 2px solid #7cb37c;
+    border-radius: 0 100% 0 100%;
+    
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+    padding: 20px;
+    text-align: center;
+  } 
+
+  /* Apple Shape */
+  .prutas {
     width: 200px;
     height: 180px;
-    background-color: #fce303; /* Bright Yellow */
+    background-color: #fce303; 
     border: 2px solid #d4be00;
-    /* This creates the rounded apple shape */
     border-radius: 50% 50% 50% 50% / 45% 45% 55% 55%;
     
     display: inline-flex;
