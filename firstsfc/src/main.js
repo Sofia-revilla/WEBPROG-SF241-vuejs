@@ -5,8 +5,8 @@ import FoodItem2 from './components/FoodItem2.vue'
 import PersonalProfile from './components/PersonalProfile.vue'
 
 // Import CSS only
-import './components/css/design.css'
-import './components/css/gallery.css'
+//import './components/css/design.css'
+//import './components/css/gallery.css'
 
 const app = createApp(App)
 
