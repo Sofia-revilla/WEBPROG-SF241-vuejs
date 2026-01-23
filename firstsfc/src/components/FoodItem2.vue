@@ -1,7 +1,5 @@
 <template>
   <div :class="['app-wrapper', { 'locked': isLocked }]">
-    <canvas id="click-canvas"></canvas>
-
     <div id="side-nav" :class="{ 'active': isSideNavActive }">
       <span class="close-nav" @click="toggleSideNav">&times;</span>
       <h3>Menu</h3>
@@ -84,15 +82,8 @@
         <div class="capabilities-display">
           <div class="section-header" style="color: white;">Capabilities</div>
           <div class="scrolling-wrapper">
-            <div class="scroll-content" :style="{ transform: 'translateY(' + scrollY + 'px)' }">
+            <div class="scroll-content">
               <div v-for="(item, index) in capabilities" :key="index" class="cap-item">
-                <div class="cap-icon-box">{{ item.icon }}</div>
-                <div class="cap-info">
-                  <h4>{{ item.title }}</h4>
-                  <small>{{ item.desc }}</small>
-                </div>
-              </div>
-              <div v-for="(item, index) in capabilities" :key="'dup'+index" class="cap-item">
                 <div class="cap-icon-box">{{ item.icon }}</div>
                 <div class="cap-info">
                   <h4>{{ item.title }}</h4>
@@ -169,13 +160,12 @@ export default {
   data() {
     return {
       isLocked: false,
-      showWelcome: false,
       isSideNavActive: false,
       isResumeOpen: false,
       activeModal: false,
       modalTitle: '',
       modalBody: '',
-      scrollY: 0,
+      // Animation state removed
       capabilities: [
         { title: 'Web Development', desc: 'HTML, CSS, JS, Vue', icon: '💻' },
         { title: 'Cyber Security', desc: 'Forensics, Linux', icon: '🔐' },
@@ -186,18 +176,7 @@ export default {
       ]
     }
   },
-  mounted() {
-    this.startScrollAnimation();
-  },
   methods: {
-    startScrollAnimation() {
-      setInterval(() => {
-        this.scrollY -= 0.8;
-        if (this.scrollY < -540) {
-          this.scrollY = 0;
-        }
-      }, 16);
-    },
     toggleSideNav() {
       this.isSideNavActive = !this.isSideNavActive;
     },
@@ -227,7 +206,6 @@ export default {
 <style src="./css/gallery.css"></style>
 
 <style scoped>
-/* Resetting hidden mouse from design.css */
 :deep(*) {
   cursor: auto !important;
 }
@@ -244,7 +222,7 @@ export default {
 
 .scrolling-wrapper {
   height: 100%;
-  overflow: hidden;
+  overflow-y: auto; /* Changed to auto to allow manual scrolling if needed */
 }
 
 .scroll-content {
