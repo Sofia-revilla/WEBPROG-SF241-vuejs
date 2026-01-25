@@ -7,12 +7,11 @@ const instruments = ref([])
 async function getInstruments() {
   const { data, error } = await supabase
     .from('instruments')
-    .select('name')
+    .select('name') // Fetching only the 'name' column
 
   if (error) {
-    console.error('Fetch Error:', error.message)
+    console.error('Supabase Error:', error.message)
   } else {
-    console.log('Data fetched:', data)
     instruments.value = data
   }
 }
@@ -29,21 +28,20 @@ onMounted(() => {
         {{ instrument.name }}
       </li>
     </ul>
-    <p v-else>No data found or loading...</p>
+    <p v-else>Loading instruments...</p>
   </div>
 </template>
 
 <style scoped>
 .list-container {
   padding: 40px;
-  font-family: serif;
+  font-family: serif; /* Standard serif to match your goal image */
 }
 ul {
   list-style-type: disc;
 }
 li {
   font-size: 1.2rem;
-  margin-bottom: 8px;
-  color: black;
+  margin-bottom: 5px;
 }
 </style>
