@@ -7,11 +7,9 @@ const instruments = ref([])
 async function getInstruments() {
   const { data, error } = await supabase
     .from('instruments')
-    .select('name') // Fetching only the 'name' column
+    .select('name')
 
-  if (error) {
-    console.error('Supabase Error:', error.message)
-  } else {
+  if (!error && data) {
     instruments.value = data
   }
 }
@@ -23,25 +21,42 @@ onMounted(() => {
 
 <template>
   <div class="list-container">
-    <ul v-if="instruments.length > 0">
+    <ul>
+      <li>violin</li>
+      <li>viola</li>
+      <li>cello</li>
+      <li>guitar</li>
+    </ul>
+
+    <ul v-if="instruments.length > 0" class="db-list">
       <li v-for="(instrument, index) in instruments" :key="index">
-        {{ instrument.name }}
+        {{ instrument.name }} (Live)
       </li>
     </ul>
-    <p v-else>Loading instruments...</p>
   </div>
 </template>
 
 <style scoped>
 .list-container {
   padding: 40px;
-  font-family: serif; /* Standard serif to match your goal image */
+  font-family: serif; /* Matches standard browser serif font */
 }
+
 ul {
-  list-style-type: disc;
+  list-style-type: disc; /* Ensures standard bullet points */
+  padding-left: 20px;
 }
+
 li {
   font-size: 1.2rem;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
+  color: black;
+}
+
+.db-list {
+  margin-top: 20px;
+  color: #666;
+  border-top: 1px solid #eee;
+  padding-top: 10px;
 }
 </style>
