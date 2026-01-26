@@ -3,5 +3,4 @@ import { createClient } from '@supabase/supabase-js'
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
 const supabasePublishableKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY
 
-// This creates the connection using your Vercel/Supabase credentials
 export const supabase = createClient(supabaseUrl, supabasePublishableKey)
