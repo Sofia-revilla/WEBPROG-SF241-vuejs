@@ -1,36 +1,23 @@
 <script setup>
-import { ref } from 'vue'
-
-// Hardcoded data based on your requirements
-const instruments = ref([
-  { id: 1, name: 'violin' },
-  { id: 2, name: 'viola' },
-  { id: 3, name: 'cello' },
-  { id: 4, name: 'guitar' }
-])
-</script>
-
-<template>
-  <div>
-    <ul>
-      <li v-for="instrument in instruments" :key="instrument.id">
-        {{ instrument.name }}
-      </li><script setup>
 import { ref, onMounted } from 'vue'
-
-// FIXED: Using './lib/supabaseClient' because 'lib' is a folder inside 'src'
+// Imports the initialized Supabase client
 import { supabase } from './lib/supabaseClient'
 
 const instruments = ref([])
+const isLoading = ref(true)
 
 async function getInstruments() {
-  // Added await and matched the table name 'instruments'
-  const { data, error } = await supabase.from('instruments').select()
-  
-  if (error) {
-    console.error('Connection Error:', error.message)
-  } else {
+  try {
+    const { data, error } = await supabase
+      .from('instruments')
+      .select()
+    
+    if (error) throw error
     instruments.value = data
+  } catch (error) {
+    console.error('Connection Error:', error.message)
+  } finally {
+    isLoading.value = false
   }
 }
 
@@ -43,34 +30,19 @@ onMounted(() => {
   <div>
     <h1>Instrument List</h1>
     
-    <p v-if="instruments.length === 0">Syncing with Supabase...</p>
+    <p v-if="isLoading">Syncing with Supabase...</p>
 
-    <ul v-else>
+    <ul v-else-if="instruments.length > 0">
       <li v-for="instrument in instruments" :key="instrument.id">
-        {{ instrument.name }} - {{ instrument.type }}
+        {{ instrument.name }} <span v-if="instrument.type">- {{ instrument.type }}</span>
       </li>
     </ul>
+
+    <p v-else>No instruments found in the database.</p>
   </div>
 </template>
 
 <style scoped>
-/* Standard bullet styling */
-ul {
-  list-style-type: disc;
-  padding-left: 40px;
-}
-li {
-  font-family: Arial, sans-serif;
-  font-size: 1.1rem;
-  margin-bottom: 5px;
-}
-</style>
-    </ul>
-  </div>
-</template>
-
-<style scoped>
-/* Matching the clean bulleted style */
 h1 {
   font-family: sans-serif;
   color: #333;
