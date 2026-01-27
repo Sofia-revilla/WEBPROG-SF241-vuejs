@@ -28,7 +28,7 @@ onMounted(() => {
 
 <template>
   <div>
-    <h1>Instrument List</h1>
+
     
     <p v-if="isLoading">Syncing with Supabase...</p>
 
