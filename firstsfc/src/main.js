@@ -1,15 +1,23 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 
-// Temporarily comment these out to isolate the error
-// import FoodItem from './components/FoodItem.vue'
-// import FoodItem2 from './components/FoodItem2.vue'
-// import PersonalProfile from './components/PersonalProfile.vue'
+// Component Imports
+import FoodItem from './components/FoodItem.vue'
+import FoodItem2 from './components/FoodItem2.vue'
+import PersonalProfile from './components/PersonalProfile.vue'
+import Country from './components/Country.vue'
+import CommentForm from './components/CommentForm.vue'
+import Comment from './components/Comment.vue'
 
 const app = createApp(App)
 
-// app.component('food-item', FoodItem)
-// app.component('food-item2', FoodItem2)
-// app.component('personal-profile', PersonalProfile)
+
+app.component('food-item', FoodItem)
+app.component('food-item-2', FoodItem2) 
+app.component('personal-profile', PersonalProfile)
+app.component('country', Country)
+app.component('comment-form', CommentForm)
+app.component('comment', Comment)
+
 
 app.mount('#app')
