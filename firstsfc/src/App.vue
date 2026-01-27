@@ -16,7 +16,56 @@ const instruments = ref([
     <ul>
       <li v-for="instrument in instruments" :key="instrument.id">
         {{ instrument.name }}
+      </li><script setup>
+import { ref, onMounted } from 'vue'
+
+// FIXED: Using './lib/supabaseClient' because 'lib' is a folder inside 'src'
+import { supabase } from './lib/supabaseClient'
+
+const instruments = ref([])
+
+async function getInstruments() {
+  // Added await and matched the table name 'instruments'
+  const { data, error } = await supabase.from('instruments').select()
+  
+  if (error) {
+    console.error('Connection Error:', error.message)
+  } else {
+    instruments.value = data
+  }
+}
+
+onMounted(() => {
+  getInstruments()
+})
+</script>
+
+<template>
+  <div>
+    <h1>Instrument List</h1>
+    
+    <p v-if="instruments.length === 0">Syncing with Supabase...</p>
+
+    <ul v-else>
+      <li v-for="instrument in instruments" :key="instrument.id">
+        {{ instrument.name }} - {{ instrument.type }}
       </li>
+    </ul>
+  </div>
+</template>
+
+<style scoped>
+/* Standard bullet styling */
+ul {
+  list-style-type: disc;
+  padding-left: 40px;
+}
+li {
+  font-family: Arial, sans-serif;
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+}
+</style>
     </ul>
   </div>
 </template>
