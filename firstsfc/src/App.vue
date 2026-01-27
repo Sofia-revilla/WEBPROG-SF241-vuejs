@@ -12,7 +12,6 @@ const instruments = ref([
 
 <template>
   <div>
-    <h1>Instrument List</h1>
     <ul>
       <li v-for="instrument in instruments" :key="instrument.id">
         {{ instrument.name }}
